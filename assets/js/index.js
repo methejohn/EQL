@@ -18,8 +18,7 @@ window.addEventListener('DOMContentLoaded', function() {
     headerTl = gsap.timeline();
 
     headerTl
-    .to('.sc-header .group-logo .logo .logo-full .letter', 2 ,{animationPlayState: "running", ease:'none'},'k')
-    .to('.sc-header .group-images', 0 ,{animationPlayState: "running", ease:'none'},'l')
+    .to('.sc-header .group-logo .logo .logo-full .letter', 2 ,{animationPlayState: "running", ease:'none'},'l')
 
     .to('.sc-header .group-logo .logo .logo-full',0,{opacity:0,ease:'none'},'m')
     .to('.sc-header .group-images .mask-bg',0,{opacity:1,ease:'none'},'m')
