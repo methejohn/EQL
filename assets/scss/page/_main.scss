@@ -61,7 +61,7 @@
         mask-position: 50% calc(50% - 3.8em);
         mask-repeat: no-repeat;
         mask-size: 7.8vw auto;
-        animation: maskZoom 1s cubic-bezier(.76,0,.24,1) forwards paused;
+        animation: maskZoom 1s 2s cubic-bezier(.76,0,.24,1) forwards;
         transform-origin: bottom left;
         .mask-bg{
             background: $secondaryColor;
