@@ -40,7 +40,7 @@
                 }
                 .letter{
                     visibility: hidden;
-                    animation: logoLetter .01s steps(6) forwards paused;
+                    animation: logoLetter .01s steps(6) forwards;
                     animation-delay: calc(.65s + .12s*var(--index));
                 }
             }
