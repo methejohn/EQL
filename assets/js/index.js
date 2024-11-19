@@ -8,72 +8,93 @@ gsap.ticker.add((time)=>{
 
 gsap.ticker.lagSmoothing(0)
 
-window.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     
-    gsap.set('.sc-header .group-images .img-roll',{scale:1.3})
-    gsap.set('.sc-header .group-images .img-roll img',{opacity:.4})
+    const logoTop = document.querySelector('.sc-header .group-logo .logo .logo-full .logo-top')
+
+    gsap.set('.sc-header .group-images .img-roll',{scale:1.3, opacity: 0.4})
     gsap.set('.sc-header .container.roll .letter',{yPercent:120, opacity:0})
     gsap.set('.sc-header .desc',{y:40})
 
-    headerTl = gsap.timeline();
+    logoTop.addEventListener('animationend', () => {
+        const headerTl = gsap.timeline();
+        
+        headerTl
+        .set('.sc-header .group-images',{
+            animationPlayState: 'running'
+        },'l+=.25')
+        
+        .to('.sc-header .group-logo .logo .logo-full',0,{opacity:0,ease:'none'},'m')
+        .to('.sc-header .group-images .mask-bg',0,{opacity:1,ease:'none'},'m')
 
-    headerTl
-    .to('.sc-header .group-logo .logo .logo-full .letter',2,{animationPlayState: "running", ease:'none'},'l')
+        .to('.sc-header .group-images .img-roll .filter',0,{opacity:1},'n+=.5')
+        .to('.sc-header .group-images .img-roll',{duration:2, opacity:1},'n+=.5')
+        .to('.sc-header .group-images .img-roll',{duration:2.5, scale:1},'n+=.5')
+        .to('.sc-header .container.roll .letter',{
+            yPercent:0,
+            opacity:1,
+            stagger:{
+                each:0.1
+            }
+        },'n+=.5')
 
-    .to('.sc-header .group-logo .logo .logo-full',0,{opacity:0,ease:'none'},'m')
-    .to('.sc-header .group-images .mask-bg',0,{opacity:1,ease:'none'},'m')
+        .to('.sc-header .group-images .img-roll img:first-child',{
+            duration:.5, 
+            visibility:'visible',
+            onComplete: () => {
+                gsap.set('.sc-header .group-images .img-roll img:first-child', {
+                    visibility: 'hidden'
+                })
+            }
+        },'n+=.5')
 
-    .to('.sc-header .group-images .img-roll .filter',0,{opacity:1},'n+=.5')
-    .to('.sc-header .group-images .img-roll img',{duration:2, opacity:1 },'n+=.5')
-    .to('.sc-header .group-images .img-roll',{duration:2.5, scale:1},'n+=.5')
-    .to('.sc-header .container.roll .letter',{
-        yPercent:0,
-        opacity:1,
-        stagger:{
-            each:0.1
-        }
-    },'n+=.5')
+        .to('.sc-header .group-images .img-roll img:not(:first-child)',{
+            visibility:'visible',
+            stagger:{
+                each: 0.1,
+                onComplete: () => {
+                    gsap.set('.sc-header .group-images .img-roll img:not(:first-child)', {
+                        visibility: 'hidden'
+                    })
+                }
+            }
+        },'n+=1')
 
-    .to('.sc-header .group-images .img-roll img:first-child',{duration:.5, visibility:'visible' },'n+=.5')
-    .to('.sc-header .group-images .img-roll img:not(:first-child)',{
-        visibility:'visible',
-        stagger:{
-            each: 0.1,
-        }
-    },'n+=1')
-    .to('.sc-header .bg',{
-        opacity:1
-    },'n+=1')
+        .to('.sc-header .bg',{
+            opacity:1
+        },'n+=1')
 
-    .to('.sc-header .group-images .img',{
-        visibility:'visible',
-    },'o-=.3')
+        .to('.sc-header .group-images .img',{
+            visibility:'visible',
+        },'o-=.3')
 
-    .to('.sc-header .group-images',{height:'80%'},'p')
-    .to('.sc-header .container.roll .letter',1,{opacity:0},'p+=.2')
-    .to('.sc-header .container',1,{opacity:1},'p+=.2')
-    .to('.sc-header .desc',1,{y:0},'p+=.2')
-    .to('.sc-header .desc',1,{y:0},'p+=.2')
-    .to('.header .logo',{visibility:'visible'},'p+=.2')
-    .to('.header .ani a svg .logo-top',{
-        duration:1.25,
-        animationPlayState:"running"},'p+=.4')
-    .to('.header .ani a svg .logo-bottom',{
-        duration:1.25,
-        animationPlayState:"running",
-        onComplete:function(){
-            $('.header .logo').removeClass('ani');
-            $('.header .logo').hover(function(){
-                $('.header .logo').addClass('draw');
-            })
-            $('.header .logo').on('animationend',function(){
-                $(this).removeClass('draw');
-            });
-        }
-    },'p+=.4')
-    .to('.header .btn-area .btn-shop',{ animationPlayState: "running", },'p+=.4')
-    .to('.header .btn-area .btn-contact',{ animationPlayState: "running", },'p+=.4')
+        .to('.sc-header .group-images',{height:'80%'},'p')
+        .to('.sc-header .container.roll .letter',1,{opacity:0},'p+=.2')
+        .to('.sc-header .container',1,{opacity:1},'p+=.2')
+        .to('.sc-header .desc',1,{y:0},'p+=.2')
+        .to('.sc-header .desc',1,{y:0},'p+=.2')
+        .to('.header .logo',{visibility:'visible'},'p+=.2')
+        .to('.header .ani a svg .logo-top',{
+            duration:1.25,
+            animationPlayState:"running"},'p+=.4')
+        .to('.header .ani a svg .logo-bottom',{
+            duration:1.25,
+            animationPlayState:"running",
+            onComplete:function(){
+                $('.header .logo').removeClass('ani');
+                $('.header .logo').hover(function(){
+                    $('.header .logo').addClass('draw');
+                })
+                $('.header .logo').on('animationend',function(){
+                    $(this).removeClass('draw');
+                });
+            }
+        },'p+=.4')
+        .to('.header .btn-area .btn-shop',{ animationPlayState: "running", },'p+=.4')
+        .to('.header .btn-area .btn-contact',{ animationPlayState: "running", },'p+=.4')
+        })
 });
+
 introTl = gsap.timeline({
     scrollTrigger:{
         trigger:'.group-introduce',
