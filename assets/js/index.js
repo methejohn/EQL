@@ -8,7 +8,7 @@ gsap.ticker.add((time)=>{
 
 gsap.ticker.lagSmoothing(0)
 
-const logoTop = document.querySelector('.sc-header .group-logo .logo .logo-full .logo-top');
+const animatedLogo = document.querySelector('.sc-header .group-logo .logo .logo-full .logo-top');
 
 window.addEventListener('load', function() {
 
@@ -16,7 +16,7 @@ window.addEventListener('load', function() {
     gsap.set('.sc-header .container.roll .letter',{yPercent:120, opacity:0})
     gsap.set('.sc-header .desc',{y:40})
 
-    logoTop.addEventListener('animationend', () => {
+    animatedLogo.addEventListener('animationend', () => {
         const headerTl = gsap.timeline();
         
         headerTl
@@ -102,7 +102,6 @@ const introTl = gsap.timeline({
         trigger:'.group-introduce',
         start:"0% 70%",
         end:"100% 100%",
-        // markers:true,
         scrub:0,
     },
 });
