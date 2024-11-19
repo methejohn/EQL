@@ -9,11 +9,31 @@ gsap.ticker.add((time)=>{
 gsap.ticker.lagSmoothing(0)
 
 const animatedLogo = document.querySelector('.sc-header .group-logo .logo .logo-full .logo-top');
+const rollImgs = document.querySelectorAll('.sc-header .group-images .img-roll img');
+let loadedCount = 0;
+
 gsap.set('.sc-header .group-images .img-roll',{scale:1.3, opacity: 0.4})
 gsap.set('.sc-header .container.roll .letter',{yPercent:120, opacity:0})
 gsap.set('.sc-header .desc',{y:40})
 
-document.addEventListener('DOMContentLoaded', function() {
+rollImgs.forEach(img => {
+    if (img.complete) {
+        loadedCount++;
+    } else {
+        img.addEventListener('load', () => {
+            loadedCount++;
+            if (loadedCount === rollImgs.length) {
+                imgLoaded();
+            }
+        })
+    }
+})
+
+if (loadedCount === rollImgs.length) {
+    imgLoaded();
+}
+
+function imgLoaded(){
     animatedLogo.addEventListener('animationend', () => {
         const headerTl = gsap.timeline();
         
@@ -93,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .to('.header .btn-area .btn-shop',{ animationPlayState: "running", },'p+=.4')
         .to('.header .btn-area .btn-contact',{ animationPlayState: "running", },'p+=.4')
         })
-});
+}
 
 const introTl = gsap.timeline({
     scrollTrigger:{
