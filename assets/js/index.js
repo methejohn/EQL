@@ -8,9 +8,9 @@ gsap.ticker.add((time)=>{
 
 gsap.ticker.lagSmoothing(0)
 
-document.addEventListener('DOMContentLoaded', function() {
-    
-    const logoTop = document.querySelector('.sc-header .group-logo .logo .logo-full .logo-top')
+const logoTop = document.querySelector('.sc-header .group-logo .logo .logo-full .logo-top');
+
+window.addEventListener('load', function() {
 
     gsap.set('.sc-header .group-images .img-roll',{scale:1.3, opacity: 0.4})
     gsap.set('.sc-header .container.roll .letter',{yPercent:120, opacity:0})
@@ -82,9 +82,11 @@ document.addEventListener('DOMContentLoaded', function() {
             animationPlayState:"running",
             onComplete:function(){
                 $('.header .logo').removeClass('ani');
+
                 $('.header .logo').hover(function(){
                     $('.header .logo').addClass('draw');
                 })
+                
                 $('.header .logo').on('animationend',function(){
                     $(this).removeClass('draw');
                 });
@@ -95,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
 });
 
-introTl = gsap.timeline({
+const introTl = gsap.timeline({
     scrollTrigger:{
         trigger:'.group-introduce',
         start:"0% 70%",
