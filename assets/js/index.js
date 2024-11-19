@@ -13,7 +13,7 @@ gsap.set('.sc-header .group-images .img-roll',{scale:1.3, opacity: 0.4})
 gsap.set('.sc-header .container.roll .letter',{yPercent:120, opacity:0})
 gsap.set('.sc-header .desc',{y:40})
 
-window.addEventListener('load', function() {
+document.addEventListener('DOMContentLoaded', function() {
     animatedLogo.addEventListener('animationend', () => {
         const headerTl = gsap.timeline();
         
